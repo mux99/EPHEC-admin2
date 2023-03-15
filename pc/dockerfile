@@ -1,7 +1,16 @@
 FROM ubuntu:latest
 
 RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        wget \
+        nano \
+        vim-tiny \
+        && rm -rf /var/lib/apt/lists/*
+        
+RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get -y install iputils-ping wget
+    apt-get -y install iputils-ping wget dnsutils
 
 CMD ["tail", "-f", "/dev/null"]

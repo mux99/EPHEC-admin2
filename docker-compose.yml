@@ -5,36 +5,50 @@ services:
       context: pc/
       dockerfile: dockerfile
     networks:
-      zone1:
-        ipv4_address: 10.1.1.35
+      global:
+        ipv4_address: 172.16.1.35
+    dns:
+      - 172.16.0.20
+      
   soa:
     build:
       context: soa/
       dockerfile: dockerfile
     networks:
-      dmz:
-        ipv4_address: 10.0.0.2
+      global:
+        ipv4_address: 172.16.0.2
+    dns:
+      - 172.16.0.20
 
   dns:
     build:
       context: dns/
       dockerfile: dockerfile
     networks:
-      trusted:
-        ipv4_address: 10.0.0.20
+      global:
+        ipv4_address: 172.16.0.20
+    dns:
+      - 172.16.0.20
 
 networks:
-  dmz:
+  global:
     driver: bridge
     ipam:
       config:
-        - subnet: 10.0.0.0/28
-  trusted:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.0.0.16/28
-  zone1:
-    ipam:
-      config:
-        - subnet: 10.1.1.0/24
+        - subnet: 172.16.0.0/16
+
+# networks:
+#   dmz:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.0.0.0/28
+#   trusted:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.0.0.16/28
+#   zone1:
+#     ipam:
+#       config:
+#         - subnet: 10.1.1.0/24
