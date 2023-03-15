@@ -5,9 +5,10 @@ services:
       context: soa/
       dockerfile: dockerfile
     ports:
-      - 53:53
+      - 54:53
     networks:
-      - dmz
+      dmz:
+        ipv4_address: 10.0.0.20
 
   dns:
     build:
@@ -16,10 +17,17 @@ services:
     ports:
       - 53:53
     networks:
-      - trusted
+      trusted:
+        ipv4_address: 10.0.0.2
 
 networks:
   dmz:
     driver: bridge
+    ipam:
+        config:
+            - subnet: 10.0.0.0/28
   trusted:
     driver: bridge
+    ipam:
+        config:
+            - subnet: 10.0.0.16/28
