@@ -1,33 +1,40 @@
 version: "3"
 services:
+  pc:
+    build:
+      context: pc/
+      dockerfile: dockerfile
+    networks:
+      zone1:
+        ipv4_address: 10.1.1.35
   soa:
     build:
       context: soa/
       dockerfile: dockerfile
-    ports:
-      - 54:53
     networks:
       dmz:
-        ipv4_address: 10.0.0.20
+        ipv4_address: 10.0.0.2
 
   dns:
     build:
       context: dns/
       dockerfile: dockerfile
-    ports:
-      - 53:53
     networks:
       trusted:
-        ipv4_address: 10.0.0.2
+        ipv4_address: 10.0.0.20
 
 networks:
   dmz:
     driver: bridge
     ipam:
-        config:
-            - subnet: 10.0.0.0/28
+      config:
+        - subnet: 10.0.0.0/28
   trusted:
     driver: bridge
     ipam:
-        config:
-            - subnet: 10.0.0.16/28
+      config:
+        - subnet: 10.0.0.16/28
+  zone1:
+    ipam:
+      config:
+        - subnet: 10.1.1.0/24
