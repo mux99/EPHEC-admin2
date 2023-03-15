@@ -1,0 +1,25 @@
+version: "3"
+services:
+  soa:
+    build:
+      context: soa/
+      dockerfile: dockerfile
+    ports:
+      - 53:53
+    networks:
+      - dmz
+
+  dns:
+    build:
+      context: dns/
+      dockerfile: dockerfile
+    ports:
+      - 53:53
+    networks:
+      - trusted
+
+networks:
+  dmz:
+    driver: bridge
+  trusted:
+    driver: bridge
