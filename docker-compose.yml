@@ -12,7 +12,7 @@ services:
       
   soa:
     build:
-      context: soa/
+      context: dns/soa/
       dockerfile: dockerfile
     networks:
       global:
@@ -22,7 +22,7 @@ services:
 
   dns:
     build:
-      context: dns/
+      context: dns/resolver/
       dockerfile: dockerfile
     networks:
       global:
