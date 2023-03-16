@@ -29,6 +29,15 @@ services:
         ipv4_address: 172.16.0.20
     dns:
       - 172.16.0.20
+  web:
+    build:
+      context: web/
+      dockerfile: Dockerfile
+    networks:
+      global:
+        ipv4_address: 172.16.0.17
+    dns:
+      - 172.16.0.20
 
   dovecot:
     build:
