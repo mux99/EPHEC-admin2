@@ -7,10 +7,12 @@ RUN apt-get update && \
         wget \
         nano \
         vim-tiny \
+        iputils-ping \
+        dnsutils \
+        mailutils \
+        ssmtp \
         && rm -rf /var/lib/apt/lists/*
         
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y install iputils-ping wget dnsutils
+COPY ssmtp.conf /etc/ssmtp/ssmtp.conf
 
 CMD ["tail", "-f", "/dev/null"]

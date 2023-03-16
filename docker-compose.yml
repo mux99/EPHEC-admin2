@@ -30,6 +30,17 @@ services:
     dns:
       - 172.16.0.20
 
+  dovecot:
+    build:
+      context: mail/dovecot/
+      dockerfile: dockerfile
+    networks:
+      global:
+        ipv4_address: 172.16.0.21
+    dns:
+      - 172.16.0.20
+  
+
 networks:
   global:
     driver: bridge

@@ -1,13 +1,16 @@
 FROM ubuntu:latest
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        wget \
-        nano \
-        vim-tiny \
-        && rm -rf /var/lib/apt/lists/*
-    
-RUN apt update
+    apt-get install -y --no-install-recommends\
+        dovecot-core \
+        dovecot-imapd \
+        dovecot-pop3d
 
+COPY dovecot.conf /etc/dovecot/
+COPY setup.sh /etc/dovecot/
+
+RUN chmod +x /etc/dovecot/setup.sh && .//etc/dovecot/setup.sh
+
+EXPOSE 143 993 110 995
+
+CMD ["/usr/sbin/dovecot", "-F"]
