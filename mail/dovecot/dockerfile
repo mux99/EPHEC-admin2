@@ -2,9 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends\
-        dovecot-core \
-        dovecot-imapd \
-        dovecot-pop3d
+        dovecot-core
 
 COPY dovecot.conf /etc/dovecot/
 COPY setup.sh /etc/dovecot/

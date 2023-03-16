@@ -9,7 +9,6 @@ RUN apt-get update && \
         vim-tiny \
         iputils-ping \
         dnsutils \
-        mailutils \
         ssmtp \
         && rm -rf /var/lib/apt/lists/*
         

@@ -49,6 +49,16 @@ services:
     dns:
       - 172.16.0.20
   
+  postfix:
+    build:
+      context: mail/postfix/
+      dockerfile: dockerfile
+    networks:
+      global:
+        ipv4_address: 172.16.0.4
+    dns:
+      - 172.16.0.20
+  
 
 networks:
   global:

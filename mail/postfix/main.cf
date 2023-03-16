@@ -1,0 +1,17 @@
+myhostname = woodytoys.lab
+mydomain = woodytoys.lab
+
+mydestination = localhost, localhost.localdomain, $myhostname, $mydomain
+
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_security_options = noanonymous
+
+smtpd_tls_security_level = may
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+
+queue_directory = /var/spool/postfix
+
+message_size_limit = 10485760
