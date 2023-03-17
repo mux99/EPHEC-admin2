@@ -10,8 +10,9 @@ RUN apt-get update && \
         iputils-ping \
         dnsutils \
         ssmtp \
+        telnet \
         && rm -rf /var/lib/apt/lists/*
         
-COPY ssmtp.conf /etc/ssmtp/ssmtp.conf
+COPY .muttrc /home/toto/
 
 CMD ["tail", "-f", "/dev/null"]

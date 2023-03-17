@@ -39,26 +39,27 @@ services:
     dns:
       - 172.16.0.20
 
-  dovecot:
+  internal:
     build:
-      context: mail/dovecot/
-      dockerfile: dockerfile
+      context: mail/internal/
+      dockerfile: Dockerfile
     networks:
       global:
         ipv4_address: 172.16.0.21
     dns:
       - 172.16.0.20
-  
-  postfix:
-    build:
-      context: mail/postfix/
-      dockerfile: dockerfile
-    networks:
-      global:
-        ipv4_address: 172.16.0.4
-    dns:
-      - 172.16.0.20
-  
+    environment:
+      - APP_HOST=woodytoys.lab
+      - DB_NAME=dbname
+    ports:
+      - '25:25'
+      - '110:110'
+      - '143:143'
+      - '995:995'
+      - '587:587'
+    volumes:
+      - '/var/run/mysqld/:/var/run/mysqld'
+      - '/home/vmail:/home/vmail/'
 
 networks:
   global:

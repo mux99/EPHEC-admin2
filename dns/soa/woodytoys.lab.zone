@@ -15,6 +15,4 @@ $TTL 86400
 dns  IN A 172.16.0.20
 soa  IN A 172.16.0.2
 www  IN A 172.16.0.17
-smtp IN A 172.16.0.4
-pop3 IN A 172.16.0.21
-imap IN A 172.16.0.21
+main IN A 172.16.0.21
