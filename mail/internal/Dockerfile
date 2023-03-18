@@ -24,6 +24,8 @@ RUN echo "dovecot   unix  -       n       n       -       -       pipe"  >> /etc
 
 ADD start.sh /start.sh  
 
+COPY mailschema.sql /docker-entrypoint-initdb.d/
+
 # default config
 ENV DB_HOST localhost
 ENV DB_USER root 

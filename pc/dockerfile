@@ -12,7 +12,7 @@ RUN apt-get update && \
         ssmtp \
         telnet \
         && rm -rf /var/lib/apt/lists/*
-        
+                
 COPY .muttrc /home/toto/
 
 CMD ["tail", "-f", "/dev/null"]

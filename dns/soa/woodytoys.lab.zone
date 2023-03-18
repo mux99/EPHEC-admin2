@@ -11,8 +11,9 @@ $TTL 86400
 
 @   IN  NS      dns.woodytoys.lab.
 @   IN  NS      soa.woodytoys.lab.
+@   IN  MX  10  mail.woodytoys.lab
 
 dns  IN A 172.16.0.20
 soa  IN A 172.16.0.2
 www  IN A 172.16.0.17
-main IN A 172.16.0.21
+mail IN A 172.16.0.21

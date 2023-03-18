@@ -51,6 +51,8 @@ services:
     environment:
       - APP_HOST=woodytoys.lab
       - DB_NAME=dbname
+      - DB_USER=root
+      - DB_PASSWORD=root
     ports:
       - '25:25'
       - '110:110'
