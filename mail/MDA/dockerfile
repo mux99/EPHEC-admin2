@@ -18,10 +18,13 @@ RUN chmod +x /usr/local/bin/createusers.sh
 
 RUN mkdir -p /var/spool/postfix/private && \
     chown postfix:postfix /var/spool/postfix/private && \
-    chmod 710 /var/spool/postfix/private
+    chmod 710 /var/spool/postfix/private && \
+    groupadd -g 5000 vmail && \
+    useradd -u 5000 -g vmail -d /home/vmail -m vmail && \
+    chown -R vmail:vmail /var/mail
 
 RUN createusers.sh
 
-EXPOSE 25 110 142 995 587
+EXPOSE 25 110 143 995 587
 
 CMD /usr/sbin/postfix start && /usr/sbin/dovecot -F

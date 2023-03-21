@@ -1,16 +1,13 @@
 inet_interfaces = all
-mydestination = localhost
+mydestination = $myhostname localhost.$mydomain localhost $mydomain
+myhostname = mail.woodytoys.lab
+mydomain = woodytoys.lab
+myorigin = $mydomain
 
-smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/auth
-smtpd_sasl_auth_enable = yes
-smtpd_sasl_security_options = noanonymous
-smtpd_sasl_local_domain = $myhostname
+smtpd_banner = $myhostname ESMTP $mail_name
 
-smtp_tls_security_level = may
-smtpd_tls_security_level = may
-smtp_tls_note_starttls_offer = yes
-smtpd_tls_loglevel = 1
-smtpd_tls_received_header = yes
-smtpd_tls_session_cache_timeout = 3600s
-tls_random_source = dev:/dev/urandom
+mynetworks = 172.16.0.0/16 [::1]/128
+smtpd_relay_restrictions = permit_mynetworks, reject
+maillog_file=/var/log/postfix.log
+debug_peer_list = woodytoys.lab
+debug_peer_level = 5
