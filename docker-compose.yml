@@ -39,29 +39,21 @@ services:
     dns:
       - 172.16.0.20
 
-  internal:
+  mda:
     build:
-      context: mail/internal/
-      dockerfile: Dockerfile
+      context: mail/MDA/
+      dockerfile: dockerfile
     networks:
       global:
         ipv4_address: 172.16.0.21
     dns:
       - 172.16.0.20
-    environment:
-      - APP_HOST=woodytoys.lab
-      - DB_NAME=dbname
-      - DB_USER=root
-      - DB_PASSWORD=root
     ports:
       - '25:25'
       - '110:110'
       - '143:143'
       - '995:995'
       - '587:587'
-    volumes:
-      - '/var/run/mysqld/:/var/run/mysqld'
-      - '/home/vmail:/home/vmail/'
 
 networks:
   global:
