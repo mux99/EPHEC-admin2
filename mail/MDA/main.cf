@@ -4,6 +4,7 @@ myhostname = mail.woodytoys.lab
 mydomain = woodytoys.lab
 myorigin = $mydomain
 
+home_mailbox = Maildir/
 smtpd_banner = $myhostname ESMTP $mail_name
 
 mynetworks = 172.16.0.0/16 [::1]/128
