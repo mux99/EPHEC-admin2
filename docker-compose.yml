@@ -1,15 +1,8 @@
 version: "3"
 services:
-  pc:
-    build:
-      context: pc/
-      dockerfile: dockerfile
-    networks:
-      global:
-        ipv4_address: 172.16.1.35
-    dns:
-      - 172.16.0.20
-      
+  # ---------------
+  #  DMZ
+  # ---------------
   soa:
     build:
       context: dns/soa/
@@ -19,7 +12,7 @@ services:
         ipv4_address: 172.16.0.2
     dns:
       - 172.16.0.20
-
+  # ---------------
   dns:
     build:
       context: dns/resolver/
@@ -29,6 +22,10 @@ services:
         ipv4_address: 172.16.0.20
     dns:
       - 172.16.0.20
+
+  # ---------------
+  #  Trusted
+  # ---------------
   web:
     build:
       context: web/
@@ -38,7 +35,7 @@ services:
         ipv4_address: 172.16.0.17
     dns:
       - 172.16.0.20
-
+  # ---------------
   mda:
     build:
       context: mail/MDA/
@@ -48,13 +45,20 @@ services:
         ipv4_address: 172.16.0.21
     dns:
       - 172.16.0.20
-    ports:
-      - '25:25'
-      - '110:110'
-      - '143:143'
-      - '995:995'
-      - '587:587'
+  # ---------------
+  #  Users
+  # ---------------
+  pc:
+    build:
+      context: pc/
+      dockerfile: dockerfile
+    networks:
+      global:
+        ipv4_address: 172.16.1.35
+    dns:
+      - 172.16.0.20
 
+# NETWORKS ==============================================
 networks:
   global:
     driver: bridge
