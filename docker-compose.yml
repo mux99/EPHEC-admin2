@@ -13,13 +13,15 @@ services:
     dns:
       - 172.16.0.20
   # ---------------
-  dns:
+      # web (public)
+  # ---------------
+  mta:
     build:
-      context: dns/resolver/
+      context: mail/MTA/
       dockerfile: dockerfile
     networks:
       global:
-        ipv4_address: 172.16.0.20
+        ipv4_address: 172.16.0.4
     dns:
       - 172.16.0.20
 
@@ -33,6 +35,18 @@ services:
     networks:
       global:
         ipv4_address: 172.16.0.17
+    dns:
+      - 172.16.0.20
+  # ---------------
+      # web db
+  # ---------------
+  dns:
+    build:
+      context: dns/resolver/
+      dockerfile: dockerfile
+    networks:
+      global:
+        ipv4_address: 172.16.0.20
     dns:
       - 172.16.0.20
   # ---------------

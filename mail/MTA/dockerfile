@@ -1,0 +1,12 @@
+FROM ubuntu:latest
+    
+RUN apt update && \
+    apt install -y --no-install-recommends \
+        postfix \
+        net-tools
+
+COPY main.cf /etc/postfix/
+
+EXPOSE 25 110 143 995 587
+#&& /usr/sbin/dovecot -F
+CMD /usr/sbin/postfix start
