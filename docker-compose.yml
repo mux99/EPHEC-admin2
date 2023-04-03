@@ -30,7 +30,7 @@ services:
   # ---------------
   web:
     build:
-      context: web/
+      context: web/intranet
       dockerfile: Dockerfile
     networks:
       global:

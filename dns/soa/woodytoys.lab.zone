@@ -16,4 +16,6 @@ $TTL 86400
 dns  IN A 172.16.0.20
 soa  IN A 172.16.0.2
 www  IN A 172.16.0.17
+b2b  IN A 172.16.0.17
+intranet  IN A 172.16.0.17
 mail IN A 172.16.0.21
