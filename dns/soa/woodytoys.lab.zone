@@ -19,3 +19,4 @@ www  IN A 172.16.0.17
 b2b  IN A 172.16.0.17
 intranet  IN A 172.16.0.17
 mail IN A 172.16.0.21
+db IN A 172.16.0.18
