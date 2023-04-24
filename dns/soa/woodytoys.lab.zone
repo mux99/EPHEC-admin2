@@ -1,7 +1,7 @@
-$ORIGIN woodytoys.lab.
+$ORIGIN ephec-ti.be.
 $TTL 86400
 
-@   IN  SOA     dns.woodytoys.lab. hostmaster.woodytoys.lab. (
+@   IN  SOA     dns.m2-7.ephec-ti.be. hostmaster.m2-7.ephec-ti.be. (
                 2022031501  ; Serial
                 3600        ; Refresh
                 1800        ; Retry
@@ -9,14 +9,14 @@ $TTL 86400
                 86400       ; Minimum TTL
                 )
 
-@   IN  NS      dns.woodytoys.lab.
-@   IN  NS      soa.woodytoys.lab.
-@   IN  MX  10  mail.woodytoys.lab
+@   IN  NS      dns.m2-7.ephec-ti.be.
+@   IN  NS      soa.m2-7.ephec-ti.be.
+@   IN  MX  10  mail.m2-7.ephec-ti.be
 
-dns  IN A 172.16.0.20
-soa  IN A 172.16.0.2
-www  IN A 172.16.0.17
-b2b  IN A 172.16.0.17
-intranet  IN A 172.16.0.17
-mail IN A 172.16.0.21
-db IN A 172.16.0.18
+dns.m2-7  IN A 172.16.0.20
+soa.m2-7  IN A 172.16.0.2
+www.m2-7  IN A 172.16.0.17
+b2b.m2-7  IN A 172.16.0.17
+intranet.m2-7  IN A 172.16.0.17
+mail.m2-7 IN A 172.16.0.21
+db.m2-7 IN A 172.16.0.18
