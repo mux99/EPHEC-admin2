@@ -89,19 +89,22 @@ services:
 networks:
   dmz:
     driver: ipvlan
-    driver_opts:
+    ipam:
       subnet: 172.42.0.0/28
-      ipvlan_mode: l2
+    driver_opts:
+      ipvlan_mode: l3
   trusted:
     driver: ipvlan
-    driver_opts:
+    ipam:
       subnet: 172.42.0.16/28
-      ipvlan_mode: l2
+    driver_opts:
+      ipvlan_mode: l3
   zone1:
     driver: ipvlan
-    driver_opts:
+    ipam:
       subnet: 172.42.1.0/24
-      ipvlan_mode: l2
+    driver_opts:
+      ipvlan_mode: l3
 
 volumes:
   database:
