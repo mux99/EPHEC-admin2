@@ -90,21 +90,27 @@ networks:
   dmz:
     driver: ipvlan
     ipam:
-      subnet: 172.42.0.0/28
+      config:
+        - subnet: 172.42.0.0/28
     driver_opts:
       ipvlan_mode: l3
+      parent: eth0.1
   trusted:
     driver: ipvlan
     ipam:
-      subnet: 172.42.0.16/28
+      config:
+        - subnet: 172.42.0.16/28
     driver_opts:
       ipvlan_mode: l3
+      parent: eth0.2
   zone1:
     driver: ipvlan
     ipam:
-      subnet: 172.42.1.0/24
+      config:
+        - subnet: 172.42.1.0/24
     driver_opts:
       ipvlan_mode: l3
+      parent: eth0.4
 
 volumes:
   database:
