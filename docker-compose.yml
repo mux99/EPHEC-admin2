@@ -9,9 +9,9 @@ services:
       dockerfile: dockerfile
     networks:
       dmz:
-        ipv4_address: 172.16.0.2
+        ipv4_address: 172.42.0.2
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
   # ---------------
       # web (public)
   # ---------------
@@ -21,9 +21,9 @@ services:
       dockerfile: dockerfile
     networks:
       dmz:
-        ipv4_address: 172.16.0.4
+        ipv4_address: 172.42.0.4
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
 
   # ---------------
   #  Trusted
@@ -34,9 +34,9 @@ services:
       dockerfile: Dockerfile
     networks:
       trusted:
-        ipv4_address: 172.16.0.17
+        ipv4_address: 172.42.0.17
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
   # ---------------
   db:
     image: mysql
@@ -49,9 +49,9 @@ services:
       - database:/docker-entrypoint-initdb.d
     networks:
       trusted:
-        ipv4_address: 172.16.0.18
+        ipv4_address: 172.42.0.18
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
   # ---------------
   dns:
     build:
@@ -59,9 +59,9 @@ services:
       dockerfile: dockerfile
     networks:
       trusted:
-        ipv4_address: 172.16.0.20
+        ipv4_address: 172.42.0.20
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
   # ---------------
   mda:
     build:
@@ -69,9 +69,9 @@ services:
       dockerfile: dockerfile
     networks:
       trusted:
-        ipv4_address: 172.16.0.21
+        ipv4_address: 172.42.0.21
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
   # ---------------
   #  Users
   # ---------------
@@ -81,9 +81,9 @@ services:
       dockerfile: dockerfile
     networks:
       zone1:
-        ipv4_address: 172.16.1.35
+        ipv4_address: 172.42.1.35
     dns:
-      - 172.16.0.20
+      - 172.42.0.20
 
 # NETWORKS ==============================================
 networks:
@@ -91,16 +91,17 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.16.0.0/28
+        - subnet: 172.42.0.0/28
   trusted:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.16.0.16/28
+        - subnet: 172.42.0.16/28
   zone1:
+    driver: bridge
     ipam:
       config:
-        - subnet: 172.16.1.0/24
+        - subnet: 172.42.1.0/24
 
 volumes:
   database:

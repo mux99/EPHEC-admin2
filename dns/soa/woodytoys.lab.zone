@@ -13,10 +13,10 @@ $TTL 86400
 @   IN  NS      soa.m2-7.ephec-ti.be.
 @   IN  MX  10  mail.m2-7.ephec-ti.be
 
-dns.m2-7  IN A 172.16.0.20
-soa.m2-7  IN A 172.16.0.2
-www.m2-7  IN A 172.16.0.17
-b2b.m2-7  IN A 172.16.0.17
-intranet.m2-7  IN A 172.16.0.17
-mail.m2-7 IN A 172.16.0.21
-db.m2-7 IN A 172.16.0.18
+dns.m2-7  IN A 172.42.0.20
+soa.m2-7  IN A 172.42.0.2
+www.m2-7  IN A 172.42.0.17
+b2b.m2-7  IN A 172.42.0.17
+intranet.m2-7  IN A 172.42.0.17
+mail.m2-7 IN A 172.42.0.21
+db.m2-7 IN A 172.42.0.18

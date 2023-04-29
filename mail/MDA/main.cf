@@ -7,7 +7,7 @@ myorigin = $mydomain
 home_mailbox = Maildir/
 smtpd_banner = $myhostname ESMTP $mail_name
 
-mynetworks = 172.16.0.0/16 [::1]/128
+mynetworks = 172.42.0.0/16 [::1]/128
 smtpd_relay_restrictions = permit_mynetworks, reject
 maillog_file=/var/log/postfix.log
 debug_peer_list = woodytoys.lab
