@@ -34,7 +34,7 @@ services:
       dockerfile: Dockerfile
     networks:
       trusted:
-        ipv4_address: 172.42.0.17
+        ipv4_address: 172.42.0.18
     dns:
       - 172.42.0.20
   # ---------------
@@ -49,7 +49,7 @@ services:
       - database:/docker-entrypoint-initdb.d
     networks:
       trusted:
-        ipv4_address: 172.42.0.18
+        ipv4_address: 172.42.0.19
     dns:
       - 172.42.0.20
   # ---------------
