@@ -89,27 +89,20 @@ services:
 
 # NETWORKS ==============================================
 networks:
-  global:
+  dmz:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.16.0.0/16
+        - subnet: 172.16.0.0/28
+  trusted:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.16/28
+  zone1:
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
 
 volumes:
   database:
-
-# networks:
-#   dmz:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 10.0.0.0/28
-#   trusted:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 10.0.0.16/28
-#   zone1:
-#     ipam:
-#       config:
-#         - subnet: 10.1.1.0/24
