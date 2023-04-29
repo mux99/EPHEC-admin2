@@ -37,7 +37,6 @@ services:
     networks:
       trusted:
         ipv4_address: 172.42.0.18
-      hostnet:
     dns:
       - 172.42.0.20
   # ---------------
@@ -53,7 +52,6 @@ services:
     networks:
       trusted:
         ipv4_address: 172.42.0.19
-      hostnet:
     dns:
       - 172.42.0.20
   # ---------------
