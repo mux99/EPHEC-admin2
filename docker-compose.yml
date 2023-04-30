@@ -10,6 +10,8 @@ services:
     networks:
       dmz:
         ipv4_address: 172.42.0.2
+      trusted:
+      zone1:
     dns:
       - 172.42.0.20
   # ---------------
@@ -22,6 +24,8 @@ services:
     networks:
       dmz:
         ipv4_address: 172.42.0.4
+      trusted:
+      zone1:
     dns:
       - 172.42.0.20
 
@@ -35,6 +39,8 @@ services:
     networks:
       trusted:
         ipv4_address: 172.42.0.18
+      dmz:
+      zone1:
     dns:
       - 172.42.0.20
   # ---------------
@@ -50,6 +56,8 @@ services:
     networks:
       trusted:
         ipv4_address: 172.42.0.19
+      dmz:
+      zone1:
     dns:
       - 172.42.0.20
   # ---------------
@@ -60,6 +68,8 @@ services:
     networks:
       trusted:
         ipv4_address: 172.42.0.20
+      dmz:
+      zone1:
     dns:
       - 172.42.0.20
   # ---------------
@@ -70,6 +80,8 @@ services:
     networks:
       trusted:
         ipv4_address: 172.42.0.21
+      dmz:
+      zone1:
     dns:
       - 172.42.0.20
   # ---------------
@@ -82,35 +94,28 @@ services:
     networks:
       zone1:
         ipv4_address: 172.42.1.35
+      dmz:
+      trusted:
     dns:
       - 172.42.0.20
 
 # NETWORKS ==============================================
 networks:
   dmz:
-    driver: ipvlan
+    driver: bridge
     ipam:
       config:
         - subnet: 172.42.0.0/28
-    driver_opts:
-      ipvlan_mode: l3
-      parent: eth0.1
   trusted:
-    driver: ipvlan
+    driver: bridge
     ipam:
       config:
         - subnet: 172.42.0.16/28
-    driver_opts:
-      ipvlan_mode: l3
-      parent: eth0.2
   zone1:
-    driver: ipvlan
+    driver: bridge
     ipam:
       config:
         - subnet: 172.42.1.0/24
-    driver_opts:
-      ipvlan_mode: l3
-      parent: eth0.4
 
 volumes:
   database:
