@@ -7,6 +7,8 @@ services:
     build:
       context: dns/soa/
       dockerfile: dockerfile
+    ports:
+      - "63:53"
     networks:
       dmz:
         ipv4_address: 172.42.0.2
@@ -21,6 +23,9 @@ services:
     build:
       context: mail/MTA/
       dockerfile: dockerfile
+    ports:
+      - "125:25"
+      - "120:110"
     networks:
       dmz:
         ipv4_address: 172.42.0.4
@@ -36,6 +41,8 @@ services:
     build:
       context: web/intranet
       dockerfile: Dockerfile
+    ports:
+      - "463:443"
     networks:
       trusted:
         ipv4_address: 172.42.0.18
@@ -53,6 +60,8 @@ services:
       MYSQL_DATABASE: clients
     volumes:
       - database:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
     networks:
       trusted:
         ipv4_address: 172.42.0.19
@@ -65,6 +74,8 @@ services:
     build:
       context: dns/resolver/
       dockerfile: dockerfile
+    ports:
+      - "83:53"
     networks:
       trusted:
         ipv4_address: 172.42.0.20
@@ -77,6 +88,9 @@ services:
     build:
       context: mail/MDA/
       dockerfile: dockerfile
+    ports:
+      - "130:110"
+      - "225:25"
     networks:
       trusted:
         ipv4_address: 172.42.0.21
@@ -91,6 +105,7 @@ services:
     build:
       context: pc/
       dockerfile: dockerfile
+
     networks:
       zone1:
         ipv4_address: 172.42.1.35
