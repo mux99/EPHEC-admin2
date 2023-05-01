@@ -8,7 +8,7 @@ services:
       context: dns/soa/
       dockerfile: dockerfile
     ports:
-      - "63:53"
+      - "64:53"
     networks:
       dmz:
         ipv4_address: 172.42.0.2
@@ -42,7 +42,7 @@ services:
       context: web/intranet
       dockerfile: Dockerfile
     ports:
-      - "463:443"
+      - "464:443"
     networks:
       trusted:
         ipv4_address: 172.42.0.18
@@ -61,7 +61,7 @@ services:
     volumes:
       - database:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       trusted:
         ipv4_address: 172.42.0.19
