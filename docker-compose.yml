@@ -8,7 +8,7 @@ services:
       context: dns/soa/
       dockerfile: dockerfile
     ports:
-      - "64:53"
+      - "49200:53"
     networks:
       dmz:
         ipv4_address: 172.42.0.2
@@ -16,16 +16,17 @@ services:
       zone1:
     dns:
       - 172.42.0.20
+
   # ---------------
-      # web (public)
+  #  web (public)
   # ---------------
   mta:
     build:
       context: mail/MTA/
       dockerfile: dockerfile
     ports:
-      - "125:25"
-      - "120:110"
+      - "49300:25"
+      - "49400:110"
     networks:
       dmz:
         ipv4_address: 172.42.0.4
@@ -42,7 +43,7 @@ services:
       context: web/intranet
       dockerfile: Dockerfile
     ports:
-      - "464:443"
+      - "49500:443"
     networks:
       trusted:
         ipv4_address: 172.42.0.18
@@ -50,7 +51,7 @@ services:
       zone1:
     dns:
       - 172.42.0.20
-  # ---------------
+
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -61,7 +62,7 @@ services:
     volumes:
       - database:/docker-entrypoint-initdb.d
     ports:
-      - "3307:3306"
+      - "49600:3306"
     networks:
       trusted:
         ipv4_address: 172.42.0.19
@@ -69,13 +70,14 @@ services:
       zone1:
     dns:
       - 172.42.0.20
+
   # ---------------
   dns:
     build:
       context: dns/resolver/
       dockerfile: dockerfile
     ports:
-      - "83:53"
+      - "49700:53"
     networks:
       trusted:
         ipv4_address: 172.42.0.20
@@ -83,14 +85,15 @@ services:
       zone1:
     dns:
       - 172.42.0.20
+
   # ---------------
   mda:
     build:
       context: mail/MDA/
       dockerfile: dockerfile
     ports:
-      - "130:110"
-      - "225:25"
+      - "49800:110"
+      - "49900:25"
     networks:
       trusted:
         ipv4_address: 172.42.0.21
@@ -98,6 +101,7 @@ services:
       zone1:
     dns:
       - 172.42.0.20
+
   # ---------------
   #  Users
   # ---------------
@@ -105,7 +109,6 @@ services:
     build:
       context: pc/
       dockerfile: dockerfile
-
     networks:
       zone1:
         ipv4_address: 172.42.1.35
