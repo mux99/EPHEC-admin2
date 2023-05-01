@@ -11,14 +11,12 @@ services:
       - "49200:53"
     networks:
       dmz:
-        ipv4_address: 172.42.0.2
+        ipv4_address: 172.42.0.3
       trusted:
       zone1:
     dns:
       - 172.42.0.20
 
-  # ---------------
-  #  web (public)
   # ---------------
   mta:
     build:
@@ -34,6 +32,8 @@ services:
       zone1:
     dns:
       - 172.42.0.20
+  # ---------------
+  #  web (public)
 
   # ---------------
   #  Trusted
@@ -46,7 +46,7 @@ services:
       - "49500:443"
     networks:
       trusted:
-        ipv4_address: 172.42.0.18
+        ipv4_address: 172.42.0.23
       dmz:
       zone1:
     dns:
@@ -65,7 +65,7 @@ services:
       - "49600:3306"
     networks:
       trusted:
-        ipv4_address: 172.42.0.19
+        ipv4_address: 172.42.0.22
       dmz:
       zone1:
     dns:
