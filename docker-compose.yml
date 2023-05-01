@@ -7,33 +7,27 @@ services:
     build:
       context: dns/soa/
       dockerfile: dockerfile
-    ports:
-      - "49200:53"
     networks:
       dmz:
-        ipv4_address: 172.42.0.5
+        ipv4_address: 172.42.0.14
       trusted:
       zone1:
     dns:
-      - 172.42.0.20
-
+      - 172.42.0.28
+  # ---------------
+      # web (public)
   # ---------------
   mta:
     build:
       context: mail/MTA/
       dockerfile: dockerfile
-    ports:
-      - "49300:25"
-      - "49400:110"
     networks:
       dmz:
-        ipv4_address: 172.42.0.4
+        ipv4_address: 172.42.0.12
       trusted:
       zone1:
     dns:
-      - 172.42.0.20
-  # ---------------
-  #  web (public)
+      - 172.42.0.28
 
   # ---------------
   #  Trusted
@@ -42,16 +36,14 @@ services:
     build:
       context: web/intranet
       dockerfile: Dockerfile
-    ports:
-      - "49500:443"
     networks:
       trusted:
-        ipv4_address: 172.42.0.23
+        ipv4_address: 172.42.0.30
       dmz:
       zone1:
     dns:
-      - 172.42.0.20
-
+      - 172.42.0.28
+  # ---------------
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -61,47 +53,37 @@ services:
       MYSQL_DATABASE: clients
     volumes:
       - database:/docker-entrypoint-initdb.d
-    ports:
-      - "49600:3306"
     networks:
       trusted:
-        ipv4_address: 172.42.0.22
+        ipv4_address: 172.42.0.29
       dmz:
       zone1:
     dns:
-      - 172.42.0.20
-
+      - 172.42.0.28
   # ---------------
   dns:
     build:
       context: dns/resolver/
       dockerfile: dockerfile
-    ports:
-      - "49700:53"
     networks:
       trusted:
-        ipv4_address: 172.42.0.20
+        ipv4_address: 172.42.0.28
       dmz:
       zone1:
     dns:
-      - 172.42.0.20
-
+      - 172.42.0.28
   # ---------------
   mda:
     build:
       context: mail/MDA/
       dockerfile: dockerfile
-    ports:
-      - "49800:110"
-      - "49900:25"
     networks:
       trusted:
-        ipv4_address: 172.42.0.21
+        ipv4_address: 172.42.0.27
       dmz:
       zone1:
     dns:
-      - 172.42.0.20
-
+      - 172.42.0.28
   # ---------------
   #  Users
   # ---------------
@@ -115,7 +97,7 @@ services:
       dmz:
       trusted:
     dns:
-      - 172.42.0.20
+      - 172.42.0.28
 
 # NETWORKS ==============================================
 networks:
