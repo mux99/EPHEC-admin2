@@ -11,7 +11,7 @@ services:
       - "49200:53"
     networks:
       dmz:
-        ipv4_address: 172.42.0.3
+        ipv4_address: 172.42.0.5
       trusted:
       zone1:
     dns:
