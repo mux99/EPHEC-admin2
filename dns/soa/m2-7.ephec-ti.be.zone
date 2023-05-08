@@ -1,7 +1,7 @@
-$ORIGIN m2-7.epehc-ti.be.
+$ORIGIN m2-7.ephec-ti.be.
 $TTL 86400
 
-@   IN  SOA     dns.m2-7.epehc-ti.be. hostmaster.m2-7.epehc-ti.be. (
+@   IN  SOA     dns.m2-7.ephec-ti.be. hostmaster.m2-7.ephec-ti.be. (
                 2022031501  ; Serial
                 3600        ; Refresh
                 1800        ; Retry
@@ -9,8 +9,8 @@ $TTL 86400
                 86400       ; Minimum TTL
                 )
 
-@   IN  NS      soa.m2-7.epehc-ti.be.
-@   IN  MX  10  mail.m2-7.epehc-ti.be.
+@   IN  NS      soa.m2-7.ephec-ti.be.
+@   IN  MX  10  mail.m2-7.ephec-ti.be.
 
 soa  IN A 172.42.0.14
 www  IN A 172.42.0.13
