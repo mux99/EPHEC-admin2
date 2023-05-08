@@ -8,7 +8,7 @@ RUN apt-get update && \
         dnsutils
     
 COPY named.conf /etc/bind/
-COPY woodytoys.lab.zone /etc/bind/
+COPY *.zone /etc/bind/
 
 EXPOSE 53/udp
 
