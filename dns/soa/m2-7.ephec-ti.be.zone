@@ -1,4 +1,4 @@
-$ORIGIN ephec-ti.be.
+$ORIGIN m2-7.ephec-ti.be.
 $TTL 86400
 
 @   IN  SOA     dns.m2-7.ephec-ti.be. hostmaster.m2-7.ephec-ti.be. (
@@ -9,14 +9,9 @@ $TTL 86400
                 86400       ; Minimum TTL
                 )
 
-@   IN  NS      dns.woodytoys.lab.
-@   IN  NS      soa.woodytoys.lab.
-@   IN  MX  10  mail.woodytoys.lab.
+@   IN  NS      soa.m2-7.ephec-ti.be.
+@   IN  MX  10  mail.m2-7.ephec-ti.be.
 
-dns  IN A 172.42.0.28
-soa  IN A 172.42.0.14
-www  IN A 172.42.0.30
-b2b  IN A 172.42.0.30
-intranet  IN A 172.42.0.30
-mail IN A 172.42.0.27
-db IN A 172.42.0.29
+soa  IN A 34.32.175.105
+www  IN A 34.32.175.105
+mail IN A 34.32.175.105

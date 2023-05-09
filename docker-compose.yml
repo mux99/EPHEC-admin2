@@ -8,10 +8,14 @@ services:
       context: dns/soa/
       dockerfile: dockerfile
     networks:
-      global:
-        ipv4_address: 172.16.0.2
+      dmz:
+        ipv4_address: 172.42.0.14
+      trusted:
+      zone1:
+    ports:
+      - "49200:53"
     dns:
-      - 172.16.0.20
+      - "172.42.0.28:49700"
   # ---------------
       # web (public)
   # ---------------
@@ -20,10 +24,15 @@ services:
       context: mail/MTA/
       dockerfile: dockerfile
     networks:
-      global:
-        ipv4_address: 172.16.0.4
+      dmz:
+        ipv4_address: 172.42.0.12
+      trusted:
+      zone1:
+    ports:
+      - "49300:25"
+      - "49400:110"
     dns:
-      - 172.16.0.20
+      - "172.42.0.28:49700"
 
   # ---------------
   #  Trusted
@@ -33,10 +42,15 @@ services:
       context: web/intranet
       dockerfile: Dockerfile
     networks:
-      global:
-        ipv4_address: 172.16.0.17
+      trusted:
+        ipv4_address: 172.42.0.30
+      dmz:
+      zone1:
+    ports:
+      - "49500:443"
     dns:
-      - 172.16.0.20
+      - "172.42.0.28:49700"
+  # ---------------
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -47,33 +61,43 @@ services:
     volumes:
       - database:/docker-entrypoint-initdb.d
     networks:
-      global:
-        ipv4_address: 172.16.0.18
+      trusted:
+        ipv4_address: 172.42.0.29
+      dmz:
+      zone1:
+    ports:
+      - "49600:3306"
     dns:
-      - 172.16.0.20
-
-  # ---------------
-      # web db
+      - "172.42.0.28:49700"
   # ---------------
   dns:
     build:
       context: dns/resolver/
       dockerfile: dockerfile
     networks:
-      global:
-        ipv4_address: 172.16.0.20
+      trusted:
+        ipv4_address: 172.42.0.28
+      dmz:
+      zone1:
+    ports:
+      - "49700:53"
     dns:
-      - 172.16.0.20
+      - "172.42.0.28:49700"
   # ---------------
   mda:
     build:
       context: mail/MDA/
       dockerfile: dockerfile
     networks:
-      global:
-        ipv4_address: 172.16.0.21
+      trusted:
+        ipv4_address: 172.42.0.27
+      dmz:
+      zone1:
+    ports:
+      - "49800:110"
+      - "49900:25"
     dns:
-      - 172.16.0.20
+      - "172.42.0.28:49700"
   # ---------------
   #  Users
   # ---------------
@@ -82,34 +106,30 @@ services:
       context: pc/
       dockerfile: dockerfile
     networks:
-      global:
-        ipv4_address: 172.16.1.35
+      zone1:
+        ipv4_address: 172.42.1.35
+      dmz:
+      trusted:
     dns:
-      - 172.16.0.20
+      - 172.42.0.28
 
 # NETWORKS ==============================================
 networks:
-  global:
+  dmz:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.16.0.0/16
+        - subnet: 172.42.0.0/28
+  trusted:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.42.0.16/28
+  zone1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.42.1.0/24
 
 volumes:
   database:
-
-# networks:
-#   dmz:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 10.0.0.0/28
-#   trusted:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 10.0.0.16/28
-#   zone1:
-#     ipam:
-#       config:
-#         - subnet: 10.1.1.0/24
