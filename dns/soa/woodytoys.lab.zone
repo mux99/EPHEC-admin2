@@ -15,7 +15,7 @@ $TTL 86400
 
 dns  IN A 172.42.0.28
 soa  IN A 172.42.0.14
-www  IN A 172.42.0.30
+www  IN A 172.42.0.13
 b2b  IN A 172.42.0.30
 intranet  IN A 172.42.0.30
 mail IN A 172.42.0.27

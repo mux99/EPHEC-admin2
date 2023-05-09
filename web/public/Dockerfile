@@ -7,7 +7,12 @@ ENV LIGHTTPD_VERSION=1.4.67-r0
 RUN apk add --update --no-cache \
 	lighttpd=${LIGHTTPD_VERSION} \
 	lighttpd-mod_auth \
-  && rm -rf /var/cache/apk/*
+	openssl \
+  && rm -rf /var/cache/apk/* \
+  && openssl req -x509 -nodes -days 365 \
+    -subj  "/C=CA/ST=QC/O=Company Inc/CN=www.m2-7.ephec-ti.be" \
+     -newkey rsa:2048 -keyout /etc/ssl/private/lighttpd-selfsigned.key \
+     -out /etc/ssl/certs/lighttpd-selfsigned.crt;
 
 COPY conf/* /etc/lighttpd/
 COPY start.sh /usr/local/bin/
