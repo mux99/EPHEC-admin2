@@ -12,6 +12,7 @@ $TTL 86400
 @   IN  NS      soa.m2-7.ephec-ti.be.
 @   IN  MX  10  mail.m2-7.ephec-ti.be.
 
+dns  IN A 34.32.175.105
 soa  IN A 34.32.175.105
 www  IN A 34.32.175.105
 mail IN A 34.32.175.105
