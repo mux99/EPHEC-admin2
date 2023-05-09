@@ -10,7 +10,7 @@ RUN apk add --update --no-cache \
 	php81 \
 	php81-cgi \
 	php81-mysqli \
-  && rm -rf /var/cache/apk/*
+  && rm -rf /var/cache/apk/* 
 
 RUN mkdir -p /var/www/localhost/htdocs/b2b \
 	&& mkdir -p /var/www/localhost/htdocs/intranet \

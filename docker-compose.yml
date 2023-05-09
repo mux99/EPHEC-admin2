@@ -16,9 +16,20 @@ services:
       - "49200:53"
     dns:
       - "172.42.0.28:49700"
-  # ---------------
-      # web (public)
-  # ---------------
+  web_pub:
+    build:
+      context: web/public
+      dockerfile: Dockerfile
+    networks:
+      dmz:
+        ipv4_address: 172.42.0.13
+      trusted:
+      zone1:
+    ports:
+      - "49201:80"
+      - "49202:443"
+    dns:
+      - "172.42.0.28:49700"
   mta:
     build:
       context: mail/MTA/
