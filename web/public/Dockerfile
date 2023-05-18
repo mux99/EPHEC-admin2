@@ -2,7 +2,7 @@
 
 FROM alpine
 
-ENV LIGHTTPD_VERSION=1.4.67-r0
+ENV LIGHTTPD_VERSION=1.4.70-r0
 
 RUN apk add --update --no-cache \
 	lighttpd=${LIGHTTPD_VERSION} \
