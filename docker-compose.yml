@@ -13,7 +13,7 @@ services:
       trusted:
       zone1:
     ports:
-      - "49200:53"
+      - "53:53/udp"
     dns:
       - "172.42.0.28:49700"
   web_pub:
@@ -26,8 +26,8 @@ services:
       trusted:
       zone1:
     ports:
-      - "49201:80"
-      - "49202:443"
+      - "80:80"
+      - "443:443"
     dns:
       - "172.42.0.28:49700"
   mta:
