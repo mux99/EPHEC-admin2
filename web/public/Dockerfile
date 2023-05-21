@@ -16,7 +16,7 @@ RUN apk add --update --no-cache \
 
 COPY conf/* /etc/lighttpd/
 COPY start.sh /usr/local/bin/
-COPY test.html /var/www/localhost/htdocs/
+COPY index.html /var/www/localhost/htdocs/
 
 EXPOSE 80
 
