@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+    
+RUN apt update && \
+    apt install -y --no-install-recommends \
+        nginx \
+        openssl
+
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+
+COPY default /etc/nginx/sites-available/
+
+RUN nginx -t
+RUN service nginx restart
+
+CMD /usr/sbin/postfix start && /usr/sbin/dovecot -F

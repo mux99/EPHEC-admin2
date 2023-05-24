@@ -12,3 +12,7 @@ smtpd_relay_restrictions = permit_mynetworks, reject
 maillog_file=/var/log/postfix.log
 debug_peer_list = woodytoys.lab
 debug_peer_level = 5
+
+relayhost = [mail.m2-7.ephec-ti.be]:25
+smtp_use_tls = no
+smtp_tls_security_level = none

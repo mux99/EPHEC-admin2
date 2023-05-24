@@ -16,6 +16,7 @@ services:
       - "53:53/udp"
     dns:
       - 172.42.0.28
+  # ---------------
   web_pub:
     build:
       context: web/public
@@ -30,9 +31,10 @@ services:
       - "443:443"
     dns:
       - 172.42.0.28
+  # ---------------
   mta:
     build:
-      context: mail/MTA/
+      context: mail/proxy/
       dockerfile: dockerfile
     networks:
       dmz:
@@ -95,9 +97,9 @@ services:
     dns:
       - 172.42.0.28
   # ---------------
-  mda:
+  mail_internal:
     build:
-      context: mail/MDA/
+      context: mail/internal/
       dockerfile: dockerfile
     networks:
       trusted:
