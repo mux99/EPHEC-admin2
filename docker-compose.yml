@@ -26,6 +26,8 @@ services:
         ipv4_address: 172.42.0.13
       trusted:
       zone1:
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
