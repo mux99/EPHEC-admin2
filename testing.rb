@@ -26,38 +26,56 @@ end
 def check_dns
     pong_pub = `ping -c 5 www.m2-7.ephec-ti.be`
     if pong_pub.split("\n").length == 1
-        puts "\e[31mError in public DNS service\e[0m"
+        puts "Public DNS Status: \e[31mERROR\e[0m"
+        puts "Ping output: \n #{pong_pub}"
     else
-        puts "Public DNS service is working"
+        puts "Public DNS Status: \e[32mOK\e[0m"
     end
-    pong_intern = `docker exec -it #{containers_ids['ephec-admin2_pc']} 'ping -c 5 intranet.woodytoys.lab'`
+    pong_intern = `docker exec -it #{$containers_ids['ephec-admin2_pc']} ping -c 5 intranet.woodytoys.lab`
     if pong_intern.split("\n").length == 1
-        puts "\e[31mError in internal DNS service\e[0m"
+        puts "Internal DNS Status: \e[31mERROR\e[0m"
+        puts "Ping output: \n #{pong_intern}"
     else
-        puts "Internal DNS service is working"
+        puts "Internal DNS Status: \e[32mOK\e[0m"
     end
 end
 
 def check_web
-    query_pub = `curl www.m2-7.ephec-ti.be`
+    query_pub = `curl --silent www.m2-7.ephec-ti.be`
     if query_pub.include? '<?xml version="1.0" encoding="iso-8859-1"?>' # something curl generates when giving an error page
-        puts "\e[31mError: the web server is not runnning or the document was not found\e[0m"
+        puts "Public Web Server Status: \e[31mERROR\e[0m"
+        puts "Curl output: \n #{query_pub}"
     else
-        puts "Public Web server is working"
+        puts "Public Web Server Status: \e[32mOK\e[0m"
     end
-    query_internal = `docker exec -it #{containers_ids['ephec-admin2_pc']} 'curl intranet.woodytoys.lab/test.php'`
+    query_internal = `docker exec -it #{$containers_ids['ephec-admin2_pc']} curl --silent intranet.woodytoys.lab/test.php`
     if query_pub.include? '<?xml version="1.0" encoding="iso-8859-1"?>' # something curl generates when giving an error page
-        puts "\e[31mError: the web server is not runnning or the document was not found or the PHP document contains errors\e[0m"
+        puts "Internal Web Server Status: \e[31mERROR\e[0m"
+        puts "Curl output: \n #{query_internal}"
     else
-        puts "Internal Web server is working"
+        puts "Internal Web Server Status: \e[32mOK\e[0m"
     end
 end
 
-puts "Checking for running services"
+def check_ssl_cert 
+    # the redirection is done so that grep actually receives the output since curl writes it in stderr instead of stdout
+    # also, could you tell I love grep?
+    query = `curl --verbose --silent www.m2-7.ephec-ti.be 2>&1 | grep '*  SSL certificate verify ok.'`
+    if query == ''
+        puts "\e[31mERRROR: SSL certificate is invalid!\e[0m"
+    else
+        puts "\e[32mSSL certificate is valid\e[0m"
+    end
+end
+
+puts "Checking for running services..."
 check_running_services
 
-puts "Checking the DNS services"
+puts "Checking the DNS services..."
+puts "Running ping on public and internal services..."
 check_dns
 
-puts "Checking the web services"
+puts "Checking the web services..."
 check_web
+puts "Checking SSL certificate..."
+check_ssl_cert
