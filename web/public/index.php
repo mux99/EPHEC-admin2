@@ -1,7 +1,7 @@
 <?php
 $servername = "db.woodytoys.lab";
-$username = "root";
-$password = "example";
+$username = "dummy";
+$password = "dojgdf__&Ih69TDP¨BHREFNqozg";
 
 $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {

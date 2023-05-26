@@ -10,10 +10,9 @@ RUN apk add --update --no-cache \
 	php81 \
 	php81-cgi \
 	php81-mysqli \
-  && rm -rf /var/cache/apk/* 
+  && rm -rf /var/cache/apk/*
 
-RUN mkdir -p /var/www/localhost/htdocs/b2b \
-	&& mkdir -p /var/www/localhost/htdocs/intranet \
+RUN mkdir -p /var/www/localhost/htdocs/intranet \
 	&& mkdir -p /etc/lighttpd/vhosts.d \
 	&& mkdir /var/run/lighttpd \
 	&& touch /var/run/lighttpd/lighttpd-fastcgi-php.socket \
@@ -24,7 +23,6 @@ RUN echo 'cgi.fix_pathinfo=1' >> /etc/php81/php.ini
 COPY conf/* /etc/lighttpd/
 COPY vhosts.d/* /etc/lighttpd/vhosts.d/
 COPY start.sh /usr/local/bin/
-COPY test.html /var/www/localhost/htdocs/b2b/
 COPY test.php /var/www/localhost/htdocs/intranet/
 
 EXPOSE 80

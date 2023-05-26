@@ -33,6 +33,9 @@ services:
       - "443:443"
     dns:
       - 172.42.0.28
+    environment:
+      - DB_USER=dummy
+      - DB_PASS=dojgdf__&Ih69TDP¨BHREFNqozg
   # ---------------
   mta:
     build:
