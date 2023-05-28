@@ -77,7 +77,7 @@ services:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: clients
     volumes:
-      - database:/docker-entrypoint-initdb.d
+      - ./database:/docker-entrypoint-initdb.d
     networks:
       trusted:
         ipv4_address: 172.42.0.29
