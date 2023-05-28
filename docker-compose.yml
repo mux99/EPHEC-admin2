@@ -148,6 +148,3 @@ networks:
     ipam:
       config:
         - subnet: 172.42.1.0/24
-
-volumes:
-  database:
