@@ -49,7 +49,7 @@ def check_web
         puts "Public Web Server Status: \e[31mERROR\e[0m"
         puts "Curl output: \n #{query_pub}"
     end
-    query_internal = `docker exec -it #{$containers_ids['ephec-admin2_pc']} curl --silent intranet.woodytoys.lab/test.php 2>&1 | grep ''`
+    query_internal = `docker exec -it #{$containers_ids['ephec-admin2_pc']} curl --silent -v intranet.woodytoys.lab/test.php 2>&1 | grep ''`
     if query_pub.include? '< HTTP/1.1 200 OK'
         puts "Internal Web Server Status: \e[32mOK\e[0m"
     else

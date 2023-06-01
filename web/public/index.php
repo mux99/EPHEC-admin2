@@ -1,9 +1,12 @@
 <?php
 $servername = "db.woodytoys.lab";
-$username = getenv("DB_USER");
-$password = getenv("DB_PASS");
+//$username = getenv("DB_USER"); php is kinda stinky
+//$password = getenv("DB_PASS");
+$username = "root";
+$password = "example";
+$dbname = "clients";
 
-$conn = new mysqli($servername, $username, $password, 3306);
+$conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
