@@ -8,6 +8,7 @@ events {
 
 mail {
     server_name       mail.m2-7.ephec-ti.be;
+    proxy  on;
 
     server {
         listen   2525;

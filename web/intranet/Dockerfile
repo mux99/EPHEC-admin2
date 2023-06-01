@@ -23,7 +23,7 @@ RUN echo 'cgi.fix_pathinfo=1' >> /etc/php81/php.ini
 COPY conf/* /etc/lighttpd/
 COPY vhosts.d/* /etc/lighttpd/vhosts.d/
 COPY start.sh /usr/local/bin/
-COPY test.php /var/www/localhost/htdocs/intranet/
+COPY index.php /var/www/localhost/htdocs/intranet/
 
 EXPOSE 80
 
