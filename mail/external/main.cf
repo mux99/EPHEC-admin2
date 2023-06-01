@@ -1,0 +1,20 @@
+inet_interfaces = all
+mydestination = $myhostname localhost.$mydomain localhost $mydomain
+myhostname = mail.m2-7.ephec-ti.be
+mydomain = m2-7.ephec-ti.be
+myorigin = $mydomain
+
+home_mailbox = Maildir/
+smtpd_banner = $myhostname ESMTP $mail_name
+
+mynetworks = 0.0.0.0/0 [::1]/128
+smtpd_relay_restrictions = permit_mynetworks, reject
+maillog_file=/var/log/postfix.log
+debug_peer_list = woodytoys.lab
+debug_peer_level = 5
+
+relayhost = [mail.m2-7.ephec-ti.be]:25
+smtpd_use_tls = yes
+smtpd_tls_cert_file = /etc/ssl/certs/mailserver.crt
+smtpd_tls_key_file = /etc/ssl/private/mailserver.key
+smtp_tls_security_level = may

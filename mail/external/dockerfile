@@ -1,0 +1,32 @@
+FROM ubuntu:latest
+    
+RUN apt update && \
+    apt install -y --no-install-recommends \
+        postfix \
+        dovecot-core \
+        dovecot-imapd \
+        dovecot-pop3d \
+        net-tools
+
+RUN openssl x509 -req -days 365 -in /etc/ssl/certs/mailserver.csr -signkey /etc/ssl/private/mailserver.key -out /etc/ssl/certs/mailserver.crt
+
+COPY main.cf /etc/postfix/
+COPY dovecot.conf /etc/dovecot/
+
+COPY createusers.sh /usr/local/bin/
+COPY users.txt /
+
+RUN chmod +x /usr/local/bin/createusers.sh
+
+RUN mkdir -p /var/spool/postfix/private && \
+    chown postfix:postfix /var/spool/postfix/private && \
+    chmod 710 /var/spool/postfix/private && \
+    groupadd -g 5000 vmail && \
+    useradd -u 5000 -g vmail -d /home/vmail -m vmail && \
+    chown -R vmail:vmail /var/mail
+
+RUN createusers.sh
+
+EXPOSE 25 110 143 995 587
+
+CMD /usr/sbin/postfix start && /usr/sbin/dovecot -F
