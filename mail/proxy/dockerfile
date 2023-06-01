@@ -1,15 +1,18 @@
-FROM ubuntu:latest
+FROM nginx
     
-RUN apt update && \
-    apt install -y --no-install-recommends \
-        nginx \
-        openssl
+RUN apt-get update && apt-get install -y \
+    libssl-dev \
+    build-essential \
+    gcc \
+    libpcre3 \
+    libpcre3-dev \
+    zlib1g \
+    zlib1g-dev
+RUN curl -LO http://nginx.org/download/nginx-1.19.10.tar.gz && tar -xzf nginx-1.19.10.tar.gz
+WORKDIR /nginx-1.19.10
+RUN ./configure --with-mail
+RUN make && make install
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+COPY default /etc/nginx/nginx.conf
 
-COPY default /etc/nginx/sites-available/
-
-RUN nginx -t
-RUN service nginx restart
-
-CMD /usr/sbin/postfix start && /usr/sbin/dovecot -F
+CMD ["nginx", "-g", "daemon off;"]

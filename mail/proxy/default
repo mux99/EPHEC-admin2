@@ -1,12 +1,28 @@
+worker_processes auto;
+
+error_log /var/log/nginx/error.log info;
+
+events {
+    worker_connections  1024;
+}
+
 mail {
+    server_name       mail.m2-7.ephec-ti.be;
+
     server {
-        listen     2525;
-        protocol   smtp;
-        
-        smtp_auth  none;
-        smtp_pass  none;
-        smtp_capabilities "SIZE 10485760";
-        
-        smtp_server 172.42.0.27:25;
+        listen   2525;
+        protocol smtp;
+        auth_http         172.42.0.27:25;
+    }
+    server {
+        listen   995;
+        protocol pop3;
+        proxy_pass_error_message on;
+        auth_http         172.42.0.27:110;
+    }
+    server {
+        listen   993;
+        protocol imap;
+        auth_http         172.42.0.27:143;
     }
 }
