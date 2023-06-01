@@ -10,19 +10,39 @@ mail {
     server_name       mail.m2-7.ephec-ti.be;
     proxy  on;
 
+    ssl_certificate        /etc/ssl/certs/server.crt;
+    ssl_certificate_key    /etc/ssl/certs/server.key;
+
     server {
         listen   2525;
         protocol smtp;
         auth_http         172.42.0.27:25;
     }
     server {
-        listen   995;
+        listen   110;
         protocol pop3;
         proxy_pass_error_message on;
         auth_http         172.42.0.27:110;
     }
     server {
-        listen   993;
+        listen   143;
+        protocol imap;
+        auth_http         172.42.0.27:143;
+    }
+
+    server {
+        listen   587 ssl;
+        protocol smtp;
+        auth_http         172.42.0.27:25;
+    }
+    server {
+        listen   995 ssl;
+        protocol pop3;
+        proxy_pass_error_message on;
+        auth_http         172.42.0.27:110;
+    }
+    server {
+        listen   993 ssl;
         protocol imap;
         auth_http         172.42.0.27:143;
     }
