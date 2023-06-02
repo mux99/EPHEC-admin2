@@ -1,12 +1,22 @@
 FROM ubuntu:latest
     
 RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive \
     apt install -y --no-install-recommends \
         postfix \
         dovecot-core \
         dovecot-imapd \
         dovecot-pop3d \
-        net-tools
+        net-tools \
+        opendkim \
+        opendkim-tools
+
+COPY opendkim.key /etc/opendkim/opendkim.key
+COPY opendkim.pub.key /etc/opendkim/opendkim.pub.key
+COPY dkim.conf /etc/opendkim.conf
+
+RUN chmod "u=rw,o=,g=" /etc/opendkim/opendkim.key
+RUN chown opendkim:opendkim /etc/opendkim/opendkim.key
 
 COPY main.cf /etc/postfix/
 COPY dovecot.conf /etc/dovecot/

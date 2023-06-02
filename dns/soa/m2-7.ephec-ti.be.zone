@@ -12,7 +12,9 @@ $TTL 86400
 @   IN  NS      soa.m2-7.ephec-ti.be.
 @   IN  MX  10  mail.m2-7.ephec-ti.be.
 
-_dmarc.m2-7.ephec-ti.be. IN TXT "v=DMARC1; p=none; rua=mailto:toto@gmail.com"
+_dmarc.m2-7.ephec-ti.be. IN TXT "v=DMARC1; p=quarantine; sp=quarantine; rua=mailto:test@m2-7.ephec-ti.be"
+default._domainkey IN TXT "v=DKIM1; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDLVmcWdJZOwXKsUNaUggVaVyonjTbboIoxFNlkKcoCDsSFvjLbm8Z9GEIXkzRTOWX8mQixByd8cp1PhGaxeYxMrRyCR9hWb5EAARmU3ndYd2mLeGns2nnVCY4WLR7+SS5Kgw4BEtBGwVlM8jTc8VM0ELLu6GRTmcjh4h8zAo9+YQIDAQAB"
+
 
 dns  IN A 34.32.175.105
 soa  IN A 34.32.175.105
