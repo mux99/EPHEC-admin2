@@ -18,6 +18,10 @@ milter_protocol = 6
 smtpd_milters = inet:localhost:8891
 non_smtpd_milters = inet:localhost:8891
 
-relayhost = [mail.m2-7.ephec-ti.be]:25
-smtp_use_tls = no
-smtp_tls_security_level = none
+smtp_tls_security_level = may
+smtp_tls_CAfile = /etc/ssl/certs/server.crt
+
+smtpd_tls_security_level = may
+smtpd_tls_cert_file = /etc/ssl/certs/server.crt
+smtpd_tls_key_file = /etc/ssl/certs/server.key
+smtpd_tls_CAfile = /etc/ssl/certs/server.crt
