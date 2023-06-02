@@ -14,36 +14,36 @@ mail {
     ssl_certificate_key    /etc/ssl/certs/server.key;
 
     server {
-        listen   25;
+        listen   2525;
         protocol smtp;
-        auth_http         172.42.0.27:49900;
+        auth_http         172.42.0.27:25;
     }
     server {
         listen   110;
         protocol pop3;
         proxy_pass_error_message on;
-        auth_http         172.42.0.27:49800;
+        auth_http         172.42.0.27:110;
     }
     server {
         listen   143;
         protocol imap;
-        auth_http         172.42.0.27:49700;
+        auth_http         172.42.0.27:143;
     }
 
     server {
         listen   587 ssl;
         protocol smtp;
-        auth_http         172.42.0.27:49900;
+        auth_http         172.42.0.27:25;
     }
     server {
         listen   995 ssl;
         protocol pop3;
         proxy_pass_error_message on;
-        auth_http         172.42.0.27:49800;
+        auth_http         172.42.0.27:110;
     }
     server {
         listen   993 ssl;
         protocol imap;
-        auth_http         172.42.0.27:49700;
+        auth_http         172.42.0.27:143;
     }
 }
