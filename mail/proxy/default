@@ -16,34 +16,34 @@ mail {
     server {
         listen   2525;
         protocol smtp;
-        proxy_pass 172.42.0.27:25;
+        auth_http         172.42.0.27:25;
     }
     server {
         listen   110;
         protocol pop3;
         proxy_pass_error_message on;
-        proxy_pass 172.42.0.27:110;
+        auth_http         172.42.0.27:110;
     }
     server {
         listen   143;
         protocol imap;
-        proxy_pass 172.42.0.27:143;
+        auth_http         172.42.0.27:143;
     }
 
     server {
         listen   587 ssl;
         protocol smtp;
-        proxy_pass 172.42.0.27:25;
+        auth_http         172.42.0.27:25;
     }
     server {
         listen   995 ssl;
         protocol pop3;
         proxy_pass_error_message on;
-        proxy_pass 172.42.0.27:110;
+        auth_http         172.42.0.27:110;
     }
     server {
         listen   993 ssl;
         protocol imap;
-        proxy_pass 172.42.0.27:143;
+        auth_http         172.42.0.27:143;
     }
 }
